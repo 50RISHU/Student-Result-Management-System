@@ -1,0 +1,48 @@
+from flask import Flask, render_template, request, flash, redirect, url_for, session
+from models import User, Meme
+from auth import signup_user, login_user
+from functools import wraps
+from meme_OP import create_meme, my_meme, all_meme, delete_meme, edit_meme, like_meme
+import os
+import uuid
+
+app = Flask(__name__)
+app.secret_key = "memeHub"
+
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+ALLOWED_FILES = {'png', 'jpg', 'jpeg', 'gif'}
+
+def isAllowed(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_FILES
+
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+
+
+@app.route('/creatememe', methods = ['GET', 'POST'])
+@login_required
+def creatememe():
+    if request.method == "POST":
+        title = request.form['title']
+        description = request.form['description']
+        image = request.files['image']
+
+        if image and isAllowed(image.filename):
+            exe =  image.filename.rsplit('.', 1)[1].lower()
+            filename = str(uuid.uuid4()) + '.' + exe
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+            image.save(filepath)
+
+            message, category, status = create_meme(title=title, description=description, imagePath=filename)
+
+            flash(message, category)
+
+            if status:
+                return redirect(url_for('index'))
+            else:
+                return redirect(url_for('creatememe'))    
+
+    return render_template('meme-operations/create-memes.html')

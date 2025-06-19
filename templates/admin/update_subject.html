@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Admin | Update Subject{% endblock
+title %} {% block content %}
+
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">Update Subject</div>
+    <div class="card-body">
+      <h5 class="card-title">Subject</h5>
+      <form action="" method="POST">
+        <div class="mb-3">
+          <label for="sub_name" class="form-label">Subject Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sub_name"
+            name="sub_name"
+            value="{{ subject.sub_name }}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="sub_code" class="form-label">Subject Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sub_code"
+            name="sub_code"
+            value="{{ subject.sub_code }}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="sub_description" class="form-label"
+            >Subject Description</label
+          >
+          <textarea
+            name="sub_description"
+            id="sub_description"
+            class="form-control"
+            name="sub_description"
+          >
+{{ subject.sub_description }}</textarea
+          >
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

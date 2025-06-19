@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %}Home{% endblock title %} {% block
+content %}
+<div class="container">
+  <div class="card text-center mb-2">
+    <div class="card-header">
+      Welcome to the Student Result Management System
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Your Central Hub for Academic Performance</h5>
+      <p class="card-text">
+        This platform provides a seamless and secure way for students to access
+        their academic results and for administrators to efficiently manage and
+        publish them.
+      </p>
+    </div>
+  </div>
+  <div class="card mb-2">
+    <h5 class="card-header">For Students</h5>
+    <div class="card-body">
+      <h5 class="card-title">Access Your Results Instantly!</h5>
+      <p class="card-text">
+        We understand how important it is to keep track of your academic
+        progress. Our system allows you to quickly and easily view your results as soon as they are released.
+        <ul>
+            <li>Secure Access: Log in using your unique student credentials.</li>
+            <li>Detailed Breakdowns: See your scores for individual subjects, overall grades, and important remarks.</li>
+            <li>Anytime, Anywhere: Access your results from any device with an internet connection</li>
+        </ul>
+      </p>
+      {% if not "user_id" in session %}
+      <span>Ready to manage results?</span> 
+      <a href="/login" class=""
+        >Log In</a
+      >
+      {% endif %}
+    </div>
+  </div>
+  <div class="card mb-2">
+    <h5 class="card-header">For Administrators</h5>
+    <div class="card-body">
+      <h5 class="card-title">Effortless Result Management & Publication</h5>
+      <p class="card-text">
+        This system empowers administrators to streamline the entire process of managing and publishing student results, saving time and ensuring accuracy.
+        <ul>
+            <li>Secure Admin Panel: Access powerful tools to manage student data and results.</li>
+            <li>Instant Publication: Publish results to students with just a few clicks.</li>
+            <li>Anytime, Anywhere: Upload students results from any device with an internet connection</li>
+        </ul>
+      </p>
+      {% if not "user_id" in session %}
+      <span>Ready to manage results?</span> 
+      <a href="/login" class=""
+        >Log In</a
+      >
+      {% endif %}
+      
+    </div>
+  </div>
+  <div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">About Our System</h5>
+    <p class="card-text">Our Student Result Management System is designed with simplicity, security, and efficiency in mind. We aim to provide a transparent and reliable platform that benefits both the student community and the academic administration. We are committed to maintaining data integrity and ensuring a smooth user experience.</p>
+  </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block title %}Login{% endblock title %} {% block
+content %}
+<div
+  class="container-fluid d-flex justify-content-center align-items-center vh-100"
+>
+  <div class="card" style="width: 25rem">
+    <div class="card-body">
+      <h5 class="card-title">Login</h5>
+      <form action="" method="POST">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="name@example.com"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+          />
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        <div class="mt-3 text-center">
+          <span
+            >Don't have an account?
+            <a href="/register" class="text-decoration-none">Register</a></span
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block title %} Admin | subject {% endblock title %}
+{% block content %}
+<div class="container d-flex justify-content-around flex-wrap">
+  {% if subjects %} {% for subject in subjects %}
+
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">{{ subject.sub_name }}</h5>
+      <h6 class="card-text">{{ subject.sub_code }}</h6>
+      <p class="card-text">{{ subject.sub_description }}</p>
+      <a
+        href="{{ url_for('remove_sub', sub_id = subject.id) }}"
+        class="btn btn-primary"
+        >Remove
+      </a>
+      <a
+        href="{{ url_for('update_sub', sub_id = subject.id) }}"
+        class="btn btn-danger"
+        >Update
+      </a>
+    </div>
+  </div>
+
+  {% endfor %} {% endif %}
+</div>
+
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">Add New Subject</div>
+    <div class="card-body">
+      <h5 class="card-title">Subject</h5>
+      <form action="" method="POST">
+        <div class="mb-3">
+          <label for="sub_name" class="form-label">Subject Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sub_name"
+            name="sub_name"
+            placeholder="Enter Subject Name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="sub_code" class="form-label">Subject Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sub_code"
+            name="sub_code"
+            placeholder="Enter Subject Code"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="sub_description" class="form-label"
+            >Subject Description</label
+          >
+          <textarea
+            name="sub_description"
+            id="sub_description"
+            class="form-control"
+            name="sub_description"
+          ></textarea>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

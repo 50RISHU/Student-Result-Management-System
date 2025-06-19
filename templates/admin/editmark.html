@@ -1,0 +1,50 @@
+<!-- templates/admin/editmark.html -->
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h3>Edit Marks for {{ result.student.name }}</h3>
+  <form method="POST">
+    <div class="mb-3">
+      <label>Declaration Date</label>
+      <input
+        type="text"
+        name="declaration_date"
+        value="{{ result.declaration_date }}"
+        class="form-control"
+      />
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Marks Obtained</th>
+          <th>Total Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject in subjects %}
+        <tr>
+          <td>{{ subject.sub_name }}</td>
+          <td>
+            <input
+              type="text"
+              name="obtained_{{ subject.id }}"
+              class="form-control"
+              value="{{ items[subject.id].mark_obtain if subject.id in items }}"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="total_{{ subject.id }}"
+              class="form-control"
+              value="{{ items[subject.id].total_mark if subject.id in items }}"
+            />
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Update Result</button>
+  </form>
+</div>
+{% endblock %}

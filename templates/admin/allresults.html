@@ -1,0 +1,54 @@
+<!-- templates/admin/allresults.html -->
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h3 class="mb-4">All Students' Results</h3>
+  {% if results %} {% for res in results %}
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between">
+      <strong>{{ res.student.name }} ({{ res.student.roll_no }})</strong>
+      <span>Declared on: {{ res.declaration_date }}</span>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Marks Obtained</th>
+            <th>Total Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in res.result %}
+          <tr>
+            <td>{{ item.subject.sub_name }}</td>
+            <td>{{ item.mark_obtain }}</td>
+            <td>{{ item.total_mark }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a
+        href="{{ url_for('editmark', rid=res.id) }}"
+        class="btn btn-sm btn-warning"
+        >Edit</a
+      >
+      <form
+        method="POST"
+        action="{{ url_for('deletemark', rid=res.id) }}"
+        class="d-inline"
+      >
+        <button
+          type="submit"
+          class="btn btn-sm btn-danger"
+          onclick="return confirm('Delete this result?')"
+        >
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <p>No results found.</p>
+  {% endif %}
+</div>
+{% endblock %}

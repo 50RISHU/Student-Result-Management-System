@@ -1,0 +1,155 @@
+{% extends "base.html" %} {% block title %} Admin panel {% endblock title %} {%
+block content %}
+
+<div class="container">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body text-center">
+      <!-- Profile Picture -->
+      <img
+        src="{{ url_for('static', filename='profile_pic/' + user.profile_pic ) }}"
+        alt="Profile Picture"
+        class="rounded-circle mb-3"
+        width="120"
+        height="120"
+        style="object-fit: cover; border: 2px solid rgb(0, 0, 0)"
+      />
+
+      <!-- Profile Info -->
+      <h4 class="card-title">Name : {{ user.name }}</h4>
+      <hr />
+      <p class="card-text text-muted">Email : {{ user.email }}</p>
+      <hr />
+      <p><strong>Role:</strong> {{ user.role | capitalize }}</p>
+    </div>
+    <div class="card-footer text-center">
+      <div class="dropdown">
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle m-1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          data-bs-auto-close="outside"
+        >
+          Upload profile picture
+        </button>
+        <form
+          class="dropdown-menu p-4"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="profile_pic" class="form-label">Profile Picture</label>
+            <input
+              type="file"
+              class="form-control"
+              name="profile_pic"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            name="action"
+            value="upload_pfp"
+          >
+            Upload
+          </button>
+        </form>
+      </div>
+      <div class="dropdown">
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle m-1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          data-bs-auto-close="outside"
+        >
+          Change Name
+        </button>
+        <form class="dropdown-menu p-4" method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label">Enter New Name</label>
+            <input type="text" class="form-control" name="name" required />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            name="action"
+            value="change_name"
+          >
+            Change Name
+          </button>
+        </form>
+      </div>
+      <div class="dropdown">
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle m-1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          data-bs-auto-close="outside"
+        >
+          Change password
+        </button>
+        <form class="dropdown-menu p-4" method="POST">
+          <div class="mb-3">
+            <label for="password" class="form-label">Enter New Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            name="action"
+            value="change_pass"
+          >
+            Change Password
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h3>Students List</h3>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Roll Number</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if students %} {% for student in students %}
+          <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.roll_no }}</td>
+            <td>
+              <a
+                href="{{ url_for('addmark', sid = student.id) }}"
+                class="btn btn-info me-2"
+                >Add Marks</a
+              ><a
+                href="{{ url_for('delete_student', student_id = student.id) }}"
+                class="btn btn-danger"
+                onclick="return confirm('Are you sure to remove {{ student.name }}?')"
+                >Remove</a
+              >
+            </td>
+          </tr>
+          {% endfor %} {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block title %} Student | My Result {% endblock
+title %} {% block content %}
+
+<div class="container">
+  <h3 class="mb-4">My Result</h3>
+  {% if results %} {% for res in results %}
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between">
+      <strong
+        >Name : {{ res.student.name }}
+        <hr />
+        Roll No. : {{res.student.roll_no}}</strong
+      >
+      <span>Declared on: {{ res.declaration_date }}</span>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Marks Obtained</th>
+            <th>Total Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in res.result %}
+          <tr>
+            <td>{{ item.subject.sub_name }}</td>
+            <td>{{ item.mark_obtain }}</td>
+            <td>{{ item.total_mark }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      <strong>Perecentage = {{ percentage }}</strong>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <p>No results available yet.</p>
+  {% endif %}
+</div>
+
+{% endblock content %}

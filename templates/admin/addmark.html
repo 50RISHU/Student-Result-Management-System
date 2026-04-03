@@ -1,0 +1,42 @@
+<!-- templates/admin/addmark.html -->
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h3>Add Marks for {{ student.name }}</h3>
+  <form method="POST">
+    <input type="hidden" name="declaration_date" value="{{ date }}" />
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Marks Obtained</th>
+          <th>Total Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject in subjects %}
+        <tr>
+          <td>{{ subject.sub_name }}</td>
+          <td>
+            <input
+              type="text"
+              name="obtained_{{ subject.id }}"
+              class="form-control"
+              required
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="total_{{ subject.id }}"
+              class="form-control"
+              required
+            />
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Save Result</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+body::-webkit-scrollbar{
+    display: none;
+}
+
+main{
+    padding-top: 66px;
+}
+
+.flash-message{
+    position: fixed;
+    bottom: 30px;
+    right: 5px;
+    max-width: 600px;
+}

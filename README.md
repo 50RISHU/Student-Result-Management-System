@@ -30,44 +30,6 @@ A Flask-based web application for managing student information, subjects, and ac
 - **Frontend**: HTML5, CSS3, Bootstrap
 - **Language**: Python 3.13+
 
-## Project Structure
-
-```
-project/
-├── main.py                  # Main Flask application and routes
-├── models.py                # Database models (User, Subject, Result, ResultItem)
-├── auth.py                  # Authentication functions
-├── utils.py                 # Utility functions
-├── requirements.txt         # Project dependencies
-├── pyproject.toml          # Project configuration
-├── management/
-│   ├── result.py           # Result management functions
-│   ├── subject.py          # Subject management functions
-│   └── student_admin.py    # Student administration functions
-├── static/
-│   ├── profile_pic/        # User profile pictures
-│   └── style/
-│       └── style.css       # Application stylesheets
-└── templates/
-    ├── index.html          # Home page
-    ├── base.html           # Base template
-    ├── about.html          # About page
-    ├── contact.html        # Contact page
-    ├── auth/
-    │   ├── login.html      # Login page
-    │   └── register.html   # Registration page
-    ├── admin/
-    │   ├── admin.html      # Admin dashboard
-    │   ├── addmark.html    # Add marks page
-    │   ├── editmark.html   # Edit marks page
-    │   ├── allresults.html # All results page
-    │   ├── subject.html    # Subject management page
-    │   └── update_subject.html  # Update subject page
-    └── student/
-        ├── dashboard.html  # Student dashboard
-        └── myresult.html   # Student results page
-```
-
 
 ## Usage
 

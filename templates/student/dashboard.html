@@ -5,14 +5,16 @@ title %} {% block content %}
   <div class="card mb-4 shadow-sm">
     <div class="card-body text-center">
       <!-- Profile Picture -->
-      <img
-        src="{{ url_for('static', filename='profile_pic/' + student.profile_pic ) }}"
-        alt="Profile Picture"
-        class="rounded-circle mb-3"
-        width="120"
-        height="120"
-        style="object-fit: cover; border: 2px solid rgb(0, 0, 0)"
-      />
+      {% if student.profile_pic %}
+        <img
+          src="{{ url_for('static', filename='profile_pic/' + student.profile_pic ) }}"
+          alt="Profile Picture"
+          class="rounded-circle mb-3"
+          width="120"
+          height="120"
+          style="object-fit: cover; border: 2px solid rgb(0, 0, 0)"
+        />
+      {% endif %}
 
       <!-- Profile Info -->
       <h4 class="card-title">Name : {{ student.name }}</h4>

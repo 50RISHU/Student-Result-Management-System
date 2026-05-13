@@ -98,13 +98,12 @@ def login():
     return render_template('/auth/login.html')
 
 #  Admin Routes
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/adminProfile', methods=['GET', 'POST'])
 @login_required
 @admin_access
-def admin():
-    user = User.get_by_id(session['user_id'])
-    students = total_students()
-    
+def admin_profile():
+    user = User.get_by_id(session['user_id'])       
+
     if request.method == "POST":
         action = request.form.get("action")
 
@@ -133,7 +132,17 @@ def admin():
             message, category = change_password(user, newPass)
             flash(message, category)
             return redirect(url_for('admin'))
-        
+
+    return render_template('admin/adminProfile.html', user=user)
+
+
+@app.route('/admin', methods=['GET', 'POST'])
+@login_required
+@admin_access
+def admin():
+    user = User.get_by_id(session['user_id'])
+    students = total_students()
+    
     return render_template('admin/admin.html', students=students, user = user)
 
 @app.route('/addmark/<int:sid>', methods=['GET', 'POST'])
@@ -277,24 +286,13 @@ def delete_student(student_id):
 
 
 #  Student Routes
-@app.route('/dashboard', methods=['GET', 'POST'])
+
+@app.route('/studentProfile', methods=['GET', 'POST'])
 @login_required
 @student_access
-def dashboard():
-    sid = session["user_id"]
-    student = User.get_or_none(User.id == sid)
-    results = show_result(sid)
-
-    if not student:
-        flash("This student does not exist", "danger")
-        return redirect(url_for('dashboard'))
-
-    # Calculate percentage
-    percentage = 0
-    for entry in results:
-        total_obtained = sum(float(item.mark_obtain) for item in entry.result)
-        total_max = sum(float(item.total_mark) for item in entry.result)
-        percentage = round((total_obtained / total_max * 100) if total_max > 0 else 0, 2)
+def student_profile():
+    user = User.get_by_id(session['user_id'])
+    student = User.get_or_none(User.id == user.id)
 
     if request.method == "POST":
         action = request.form.get("action")
@@ -324,6 +322,29 @@ def dashboard():
             message, category = change_password(student, newPass)
             flash(message, category)
             return redirect(url_for('dashboard'))
+
+
+
+    return render_template('student/studentProfile.html', student=user)
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
+@student_access
+def dashboard():
+    sid = session["user_id"]
+    student = User.get_or_none(User.id == sid)
+    results = show_result(sid)
+
+    if not student:
+        flash("This student does not exist", "danger")
+        return redirect(url_for('dashboard'))
+
+    # Calculate percentage
+    percentage = 0
+    for entry in results:
+        total_obtained = sum(float(item.mark_obtain) for item in entry.result)
+        total_max = sum(float(item.total_mark) for item in entry.result)
+        percentage = round((total_obtained / total_max * 100) if total_max > 0 else 0, 2)
 
     return render_template("student/dashboard.html", student=student, percentage=percentage, result=results)
 

@@ -67,6 +67,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/subject">Subjects</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/adminProfile">Profile</a>
+                </li>
+                
                 {% elif session['role'] == "student" %}
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/dashboard"
@@ -75,6 +79,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/myresult">My Results</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/studentProfile">Profile</a>
                 </li>
                 
                 {% endif %}
